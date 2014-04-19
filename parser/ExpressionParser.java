@@ -190,21 +190,16 @@ public class ExpressionParser {
         return res;
     }
     
-    private static Expression3 parse(String input) throws ParserException {
+    public static Expression3 parse(String input) throws ParserException {
         balance = 0;
         s = input;
         last = 0;
         return expr();
     }
     
-    public static double calc(String input, double x) throws MyCalcException {
-        try {
-            Expression3 ex = parse(input);
-            if (ex != null) {
-                return ex.evaluate(x, 0, 0);
-            }
-        } catch (ParserException e) {
-            System.err.println(e.getMessage());
+    public static double calc(Expression3 ex, double x, double y, double z) throws MyCalcException {
+        if (ex != null) {
+            return ex.evaluate(x, y, z);
         }
         return 0;
     }

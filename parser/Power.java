@@ -14,7 +14,9 @@ public class Power extends BinaryOperation {
         }
     
         double res = Math.pow(f, s);
-         
+        if (res != res) {
+            throw new NegativePower("NaN");
+        }
         return (double)res;
     }
 }
