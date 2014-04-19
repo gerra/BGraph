@@ -8,13 +8,13 @@ public class ExpressionParser {
     static int last; 
     static int balance;
     
-    public static void deleteSpaces() {
+    private static void deleteSpaces() {
         while (last < s.length() && Character.isWhitespace(s.charAt(last))) {
             last++;
         }
     }
     
-    public static double getNumber(int sign) throws ParserException {
+    private static double getNumber(int sign) throws ParserException {
         char c = s.charAt(last);
         double val = 0;
         int pow10 = 0;
@@ -51,7 +51,7 @@ public class ExpressionParser {
         return val;
     }
     
-    public static Expression3 operand() throws ParserException {
+    private static Expression3 operand() throws ParserException {
         deleteSpaces();
         if (last == s.length()) {
             throw new ParserException("Parsing error of " + '"' + s + '"' + " on position " + last + ": expected operand, found null");
@@ -103,7 +103,7 @@ public class ExpressionParser {
         return res;
     }
     
-    public static Expression3 brackets() throws ParserException {
+    private static Expression3 brackets() throws ParserException {
         Expression3 res;
         deleteSpaces();
         if (last < s.length() && s.charAt(last) == '(') {
@@ -122,7 +122,7 @@ public class ExpressionParser {
         return res;
     }
     
-    public static Expression3 powerFactor() throws ParserException {
+    private static Expression3 powerFactor() throws ParserException {
         Expression3 res = brackets();
         deleteSpaces();
         if (last < s.length()) {
@@ -148,7 +148,7 @@ public class ExpressionParser {
         }
     }
     
-    public static Expression3 factor() throws ParserException {
+    private static Expression3 factor() throws ParserException {
         Expression3 res = powerFactor();
         deleteSpaces();
         while (last < s.length()) {
@@ -169,7 +169,7 @@ public class ExpressionParser {
         return res;
     }
     
-    public static Expression3 expr() throws ParserException {
+    private static Expression3 expr() throws ParserException {
         Expression3 res = factor();
         deleteSpaces();
         while (last < s.length()) {
@@ -190,7 +190,7 @@ public class ExpressionParser {
         return res;
     }
     
-    public static Expression3 parse(String input) throws ParserException {
+    private static Expression3 parse(String input) throws ParserException {
         balance = 0;
         s = input;
         last = 0;
